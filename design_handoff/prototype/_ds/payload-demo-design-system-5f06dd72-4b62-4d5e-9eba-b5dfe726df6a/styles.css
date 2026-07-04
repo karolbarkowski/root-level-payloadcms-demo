@@ -1,0 +1,7 @@
+/* Root Level Design System — global stylesheet entry point.
+   Consumers should link only this file; it imports the full token set. */
+@import url('./tokens/fonts.css');
+@import url('./tokens/colors.css');
+@import url('./tokens/typography.css');
+@import url('./tokens/spacing.css');
+@import url('./tokens/effects.css');

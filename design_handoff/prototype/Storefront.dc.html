@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/tokens/colors.css">
+<link rel="stylesheet" href="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/tokens/typography.css">
+<link rel="stylesheet" href="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/tokens/effects.css">
+<script src="_ds/payload-demo-design-system-5f06dd72-4b62-4d5e-9eba-b5dfe726df6a/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; }
+  @keyframes rlfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: var(--color-bg); font-family: var(--font-sans); color: var(--color-ink);">
+
+  <!-- UTILITY BAR -->
+  <div style="background: var(--color-espresso); color: var(--color-bg-alt);">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 32px; height: 36px; display: flex; align-items: center; justify-content: space-between; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;">
+      <span style="opacity: 0.85;">Complimentary white-glove delivery on every order</span>
+      <span style="opacity: 0.85;">Trade Program · +1 (212) 555 0148</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <div style="background: var(--color-bg); border-bottom: 1px solid var(--color-border); position: sticky; top: 0; z-index: 40;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 0 32px; height: 78px; display: flex; align-items: center; justify-content: space-between;">
+      <div onClick="{{ goHome }}" style="font-family: var(--font-serif-display); font-size: 25px; letter-spacing: 0.02em; cursor: pointer;">Root Level</div>
+      <div style="display: flex; align-items: center; gap: 34px;">
+        <span onClick="{{ goLighting }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Lighting</span>
+        <span onClick="{{ goFurniture }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Furniture</span>
+        <span onClick="{{ goDecor }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Decor</span>
+        <span onClick="{{ goShopAll }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Shop All</span>
+        <span onClick="{{ goJournal }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Journal</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 22px;">
+        <span onClick="{{ goSearch }}" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Search</span>
+        <span onClick="{{ goCart }}" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Cart ({{ cartCount }})</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HOME ============ -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div style="animation: rlfade 0.4s ease;">
+    <!-- HERO -->
+    <div style="position: relative; height: 620px; background: linear-gradient(135deg, #E5DBCB 0%, #B79A6A 55%, #7C6136 100%); display: flex; align-items: center;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 0 32px; width: 100%;">
+        <div style="max-width: 560px;">
+          <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-espresso); font-weight: 600; margin-bottom: 22px;">Est. 2006 · Handcrafted</div>
+          <h1 style="font-family: var(--font-serif-display); font-size: 62px; line-height: 1.05; margin: 0 0 24px; color: var(--color-ink); font-weight: 400;">A Heritage of Distinction</h1>
+          <p style="font-size: 18px; line-height: 1.7; color: var(--color-espresso); margin: 0 0 36px; max-width: 460px;">Lighting, furniture, and objects made by hand — quiet pieces built to be lived with for decades, not seasons.</p>
+          <div style="display: flex; gap: 14px;">
+            <button onClick="{{ goShopAll }}" style="font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px 34px; border-radius: 2px; border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-bg); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-espresso); border-color: var(--color-espresso);">Shop the Collection</button>
+            <button onClick="{{ goLighting }}" style="font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px 34px; border-radius: 2px; border: 1px solid var(--color-ink); background: transparent; color: var(--color-ink); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-ink); color: var(--color-bg);">Explore Lighting</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHOP BY CATEGORY -->
+    <div style="max-width: 1440px; margin: 0 auto; padding: 96px 32px 40px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-serif-display); font-size: 34px; margin: 0; font-weight: 400;">Shop by Category</h2>
+        <span onClick="{{ goShopAll }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-bottom: 1px solid var(--color-ink); padding-bottom: 3px; transition: var(--transition-hover);" style-hover="color: var(--color-brass); border-color: var(--color-brass);">View All</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <sc-for list="{{ categoryTiles }}" as="c" hint-placeholder-count="4">
+          <div onClick="{{ c.onOpen }}" style="cursor: pointer;">
+            <div style="aspect-ratio: 3/4; background: {{ c.gradient }}; margin-bottom: 16px; position: relative; overflow: hidden;">
+              <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 22px;">
+                <span style="font-family: var(--font-serif-display); font-size: 22px; color: var(--color-surface);">{{ c.title }}</span>
+              </div>
+            </div>
+            <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-text-secondary);">{{ c.count }} pieces</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- NEW THIS SEASON -->
+    <div style="max-width: 1440px; margin: 0 auto; padding: 64px 32px 40px;">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-brass); font-weight: 600; margin-bottom: 14px;">New This Season</div>
+        <h2 style="font-family: var(--font-serif-display); font-size: 34px; margin: 0; font-weight: 400;">Recently Added</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px 16px;">
+        <sc-for list="{{ featured }}" as="p" hint-placeholder-count="4">
+          <div onClick="{{ p.onOpen }}" style="cursor: pointer;">
+            <div style="aspect-ratio: 1/1; background: {{ p.gradient }}; margin-bottom: 16px; position: relative;">
+              <sc-if value="{{ p.isNew }}" hint-placeholder-val="{{ true }}">
+                <span style="position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); border: 1px solid var(--color-brass); border-radius: 999px; padding: 3px 10px; background: rgba(247,245,241,0.55);">New</span>
+              </sc-if>
+            </div>
+            <div style="font-family: var(--font-serif-display); font-size: 17px; margin-bottom: 4px;">{{ p.name }}</div>
+            <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px;">{{ p.dims }}</div>
+            <div style="font-size: 14px;">{{ p.priceLabel }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- EDITORIAL BAND -->
+    <div style="background: var(--color-bg-alt); margin-top: 64px;">
+      <div style="max-width: 1000px; margin: 0 auto; padding: 100px 32px; text-align: center;">
+        <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-brass); font-weight: 600; margin-bottom: 20px;">Design, Delivered</div>
+        <h2 style="font-family: var(--font-serif-display); font-size: 40px; line-height: 1.2; margin: 0 0 22px; font-weight: 400;">Every piece leaves the studio finished by hand and delivered with white-glove care.</h2>
+        <p style="font-size: 17px; line-height: 1.7; color: var(--color-text-secondary); max-width: 620px; margin: 0 auto;">We keep our catalog small on purpose. What we make, we make well — and we stand behind it for the life of the piece.</p>
+      </div>
+    </div>
+
+    <!-- JOURNAL TEASER -->
+    <div style="max-width: 1440px; margin: 0 auto; padding: 96px 32px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-serif-display); font-size: 34px; margin: 0; font-weight: 400;">From the Journal</h2>
+        <span onClick="{{ goJournal }}" style="font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-bottom: 1px solid var(--color-ink); padding-bottom: 3px; transition: var(--transition-hover);" style-hover="color: var(--color-brass); border-color: var(--color-brass);">All Posts</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+        <sc-for list="{{ journalTeaser }}" as="post" hint-placeholder-count="3">
+          <div onClick="{{ post.onOpen }}" style="cursor: pointer;">
+            <div style="aspect-ratio: 3/2; background: {{ post.gradient }}; margin-bottom: 18px;"></div>
+            <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 10px;">{{ post.tagsLabel }}</div>
+            <div style="font-family: var(--font-serif-display); font-size: 21px; line-height: 1.3; margin-bottom: 10px;">{{ post.title }}</div>
+            <div style="font-size: 14px; line-height: 1.6; color: var(--color-text-secondary);">{{ post.excerpt }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ COLLECTION ============ -->
+  <sc-if value="{{ isCollection }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 40px 32px 96px; animation: rlfade 0.4s ease;">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 28px;">
+      <span onClick="{{ goHome }}" style="cursor: pointer;">Home</span><span>/</span><span style="color: var(--color-ink);">{{ collectionTitle }}</span>
+    </div>
+    <h1 style="font-family: var(--font-serif-display); font-size: 44px; margin: 0 0 8px; font-weight: 400;">{{ collectionTitle }}</h1>
+    <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 40px;">{{ resultLabel }}</div>
+
+    <div style="display: grid; grid-template-columns: 240px 1fr; gap: 48px; align-items: start;">
+      <!-- FACETS -->
+      <div style="position: sticky; top: 110px;">
+        <div style="margin-bottom: 34px;">
+          <div style="display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--color-border); padding-bottom: 8px; margin-bottom: 18px;">
+            <input value="{{ searchValue }}" onChange="{{ onSearch }}" placeholder="Search pieces" style="border: 0; background: transparent; font-family: var(--font-sans); font-size: 14px; width: 100%; outline: none; color: var(--color-ink);" />
+          </div>
+        </div>
+        <div style="margin-bottom: 34px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink); font-weight: 600; margin-bottom: 16px;">Category</div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <sc-for list="{{ facetCategories }}" as="c" hint-placeholder-count="5">
+              <span onClick="{{ c.onClick }}" style="font-size: 14px; cursor: pointer; color: {{ c.color }}; transition: var(--transition-hover);">{{ c.label }}</span>
+            </sc-for>
+          </div>
+        </div>
+        <div style="margin-bottom: 34px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink); font-weight: 600; margin-bottom: 16px;">Finish</div>
+          <div style="display: flex; flex-direction: column; gap: 13px;">
+            <sc-for list="{{ facetFinishes }}" as="f" hint-placeholder-count="5">
+              <label style="display: flex; align-items: center; gap: 11px; cursor: pointer; font-size: 14px;">
+                <span style="width: 17px; height: 17px; border: 1px solid var(--color-ink); border-radius: 2px; display: inline-flex; align-items: center; justify-content: center; background: {{ f.boxBg }};">
+                  <span style="width: 8px; height: 8px; background: {{ f.tickBg }};"></span>
+                </span>
+                <span onClick="{{ f.onToggle }}" style="display: inline-flex; align-items: center; gap: 8px;"><span style="width: 12px; height: 12px; border-radius: 999px; border: 1px solid var(--color-border); background: {{ f.hex }};"></span>{{ f.name }}</span>
+              </label>
+            </sc-for>
+          </div>
+        </div>
+        <div style="margin-bottom: 30px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-ink); font-weight: 600; margin-bottom: 16px;">Max Price</div>
+          <input type="range" min="150" max="2600" step="20" value="{{ priceMax }}" onChange="{{ onPrice }}" style="width: 100%; accent-color: var(--color-ink);" />
+          <div style="font-size: 13px; color: var(--color-text-secondary); margin-top: 8px;">Up to {{ priceMaxLabel }}</div>
+        </div>
+        <span onClick="{{ clearFilters }}" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--color-brass);">Clear all filters</span>
+      </div>
+
+      <!-- GRID -->
+      <div>
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 20px;">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+            <div onClick="{{ p.onOpen }}" style="cursor: pointer;">
+              <div style="aspect-ratio: 1/1; background: {{ p.gradient }}; margin-bottom: 16px; position: relative;">
+                <sc-if value="{{ p.isNew }}" hint-placeholder-val="{{ false }}">
+                  <span style="position: absolute; top: 12px; left: 12px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); border: 1px solid var(--color-brass); border-radius: 999px; padding: 3px 10px; background: rgba(247,245,241,0.55);">New</span>
+                </sc-if>
+              </div>
+              <div style="font-family: var(--font-serif-display); font-size: 17px; margin-bottom: 4px;">{{ p.name }}</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 2px;">{{ p.dims }}</div>
+              <div style="font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.04em; margin-bottom: 6px;">SKU {{ p.sku }}</div>
+              <div style="font-size: 14px;">{{ p.priceLabel }}</div>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <div style="padding: 80px 0; text-align: center; color: var(--color-text-secondary);">
+            <div style="font-family: var(--font-serif-display); font-size: 24px; color: var(--color-ink); margin-bottom: 12px;">Nothing matches those filters</div>
+            <span onClick="{{ clearFilters }}" style="font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--color-brass);">Clear filters</span>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ PRODUCT ============ -->
+  <sc-if value="{{ isProduct }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 40px 32px 96px; animation: rlfade 0.4s ease;">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 32px;">
+      <span onClick="{{ goHome }}" style="cursor: pointer;">Home</span><span>/</span><span onClick="{{ cur.onCategory }}" style="cursor: pointer;">{{ cur.categoryLabel }}</span><span>/</span><span style="color: var(--color-ink);">{{ cur.name }}</span>
+    </div>
+    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: start;">
+      <!-- GALLERY -->
+      <div>
+        <div style="aspect-ratio: 1/1; background: {{ cur.gradient }}; margin-bottom: 14px;"></div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+          <sc-for list="{{ cur.thumbs }}" as="t" hint-placeholder-count="4">
+            <div style="aspect-ratio: 1/1; background: {{ t.gradient }};"></div>
+          </sc-for>
+        </div>
+      </div>
+      <!-- INFO -->
+      <div style="position: sticky; top: 110px;">
+        <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 14px;">{{ cur.categoryLabel }}</div>
+        <h1 style="font-family: var(--font-serif-display); font-size: 40px; margin: 0 0 14px; font-weight: 400;">{{ cur.name }}</h1>
+        <div style="font-size: 22px; margin-bottom: 22px;">{{ cur.priceLabel }}</div>
+        <p style="font-size: 16px; line-height: 1.7; color: var(--color-text-secondary); margin: 0 0 30px;">{{ cur.blurb }}</p>
+
+        <!-- FINISH -->
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink); font-weight: 600; margin-bottom: 12px;">Finish — {{ cur.finishLabel }}</div>
+        <div style="display: flex; gap: 12px; margin-bottom: 28px;">
+          <sc-for list="{{ cur.finishes }}" as="f" hint-placeholder-count="3">
+            <button onClick="{{ f.onSelect }}" title="{{ f.name }}" style="width: 34px; height: 34px; border-radius: 999px; background: {{ f.hex }}; cursor: pointer; padding: 0; border: 1px solid var(--color-border); box-shadow: {{ f.ring }}; transition: var(--transition-hover);"></button>
+          </sc-for>
+        </div>
+
+        <!-- SIZE -->
+        <sc-if value="{{ cur.hasSizes }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-ink); font-weight: 600; margin-bottom: 12px;">Size</div>
+          <div style="display: flex; gap: 10px; margin-bottom: 28px;">
+            <sc-for list="{{ cur.sizes }}" as="s" hint-placeholder-count="3">
+              <button onClick="{{ s.onSelect }}" style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.04em; padding: 10px 18px; border-radius: 2px; cursor: pointer; background: {{ s.bg }}; color: {{ s.color }}; border: 1px solid {{ s.border }}; transition: var(--transition-hover);">{{ s.label }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <!-- QTY + ADD -->
+        <div style="display: flex; gap: 14px; margin-bottom: 26px;">
+          <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: 2px;">
+            <button onClick="{{ cur.onDec }}" style="width: 44px; height: 48px; background: transparent; border: 0; font-size: 18px; cursor: pointer; color: var(--color-ink);">−</button>
+            <span style="width: 34px; text-align: center; font-size: 15px;">{{ cur.qty }}</span>
+            <button onClick="{{ cur.onInc }}" style="width: 44px; height: 48px; background: transparent; border: 0; font-size: 18px; cursor: pointer; color: var(--color-ink);">+</button>
+          </div>
+          <button onClick="{{ cur.onAdd }}" style="flex: 1; font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 0 32px; height: 50px; border-radius: 2px; border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-bg); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-espresso); border-color: var(--color-espresso);">Add to Cart</button>
+        </div>
+        <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 34px;">Ships Free · White-Glove Delivery</div>
+
+        <div style="height: 1px; background: var(--color-border); margin-bottom: 28px;"></div>
+        <sc-for list="{{ cur.description }}" as="para" hint-placeholder-count="2">
+          <p style="font-size: 15px; line-height: 1.75; color: var(--color-text-secondary); margin: 0 0 16px;">{{ para.text }}</p>
+        </sc-for>
+        <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;"><span style="color: var(--color-text-secondary);">Dimensions</span><span>{{ cur.dims }}</span></div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px;"><span style="color: var(--color-text-secondary);">SKU</span><span>{{ cur.sku }}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CART ============ -->
+  <sc-if value="{{ isCart }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 56px 32px 96px; animation: rlfade 0.4s ease;">
+    <h1 style="font-family: var(--font-serif-display); font-size: 44px; margin: 0 0 40px; font-weight: 400;">Your Cart</h1>
+    <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+      <div style="padding: 60px 0; border-top: 1px solid var(--color-border);">
+        <p style="font-size: 16px; color: var(--color-text-secondary); margin: 0 0 22px;">Your cart is empty.</p>
+        <button onClick="{{ goShopAll }}" style="font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 30px; border-radius: 2px; border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-bg); cursor: pointer;">Browse the Collection</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start;">
+      <div>
+        <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="2">
+          <div style="display: grid; grid-template-columns: 96px 1fr auto; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--color-border); align-items: center;">
+            <div style="width: 96px; height: 96px; background: {{ l.gradient }};"></div>
+            <div>
+              <div style="font-family: var(--font-serif-display); font-size: 18px; margin-bottom: 5px;">{{ l.name }}</div>
+              <div style="font-size: 12px; color: var(--color-text-secondary); margin-bottom: 3px;">{{ l.variant }}</div>
+              <div style="font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.04em; margin-bottom: 12px;">SKU {{ l.sku }}</div>
+              <div style="display: flex; align-items: center; gap: 16px;">
+                <div style="display: flex; align-items: center; border: 1px solid var(--color-border); border-radius: 2px;">
+                  <button onClick="{{ l.onDec }}" style="width: 32px; height: 34px; background: transparent; border: 0; cursor: pointer; font-size: 15px;">−</button>
+                  <span style="width: 26px; text-align: center; font-size: 14px;">{{ l.qty }}</span>
+                  <button onClick="{{ l.onInc }}" style="width: 32px; height: 34px; background: transparent; border: 0; cursor: pointer; font-size: 15px;">+</button>
+                </div>
+                <span onClick="{{ l.onRemove }}" style="font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); cursor: pointer; transition: var(--transition-hover);" style-hover="color: var(--color-brass);">Remove</span>
+              </div>
+            </div>
+            <div style="font-size: 16px; text-align: right;">{{ l.priceLabel }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="background: var(--color-bg-alt); padding: 32px;">
+        <div style="font-family: var(--font-serif-display); font-size: 22px; margin-bottom: 24px; font-weight: 400;">Order Summary</div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 14px;"><span style="color: var(--color-text-secondary);">Subtotal</span><span>{{ subtotalLabel }}</span></div>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 14px;"><span style="color: var(--color-text-secondary);">Delivery</span><span>Complimentary</span></div>
+        <div style="height: 1px; background: var(--color-border); margin: 18px 0;"></div>
+        <div style="display: flex; justify-content: space-between; font-size: 17px; margin-bottom: 26px;"><span>Total</span><span>{{ totalLabel }}</span></div>
+        <button onClick="{{ goDelivery }}" style="width: 100%; font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px; border-radius: 2px; border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-bg); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-espresso); border-color: var(--color-espresso);">Proceed to Delivery</button>
+      </div>
+    </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <!-- ============ DELIVERY (mock) ============ -->
+  <sc-if value="{{ isDelivery }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 1100px; margin: 0 auto; padding: 56px 32px 96px; animation: rlfade 0.4s ease;">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 28px;">
+      <span onClick="{{ goCart }}" style="cursor: pointer;">Cart</span><span>/</span><span style="color: var(--color-ink);">Delivery</span>
+    </div>
+    <h1 style="font-family: var(--font-serif-display); font-size: 44px; margin: 0 0 8px; font-weight: 400;">Delivery Details</h1>
+    <div style="font-size: 13px; color: var(--color-text-secondary); margin-bottom: 40px;">Demo checkout — details are pre-filled and no payment is taken.</div>
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start;">
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="border: 1px solid var(--color-border); padding: 26px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Shipping To</div>
+          <div style="font-size: 16px; line-height: 1.7;">Ava Mercer<br/>218 Greenwich Street, Apt 9C<br/>New York, NY 10007<br/>United States</div>
+        </div>
+        <div style="border: 1px solid var(--color-border); padding: 26px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Delivery Method</div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div><div style="font-size: 16px; margin-bottom: 4px;">White-Glove Delivery</div><div style="font-size: 13px; color: var(--color-text-secondary);">Unpacked, placed, and packaging removed. 3–5 weeks.</div></div>
+            <div style="font-size: 14px; color: var(--color-brass);">Complimentary</div>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--color-border); padding: 26px;">
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Contact</div>
+          <div style="font-size: 16px; line-height: 1.7;">ava.mercer@example.com<br/>+1 (212) 555 0148</div>
+        </div>
+      </div>
+      <div style="background: var(--color-bg-alt); padding: 32px;">
+        <div style="font-family: var(--font-serif-display); font-size: 22px; margin-bottom: 24px; font-weight: 400;">Order Summary</div>
+        <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="2">
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 12px;"><span style="color: var(--color-text-secondary); max-width: 200px;">{{ l.name }} × {{ l.qty }}</span><span>{{ l.priceLabel }}</span></div>
+        </sc-for>
+        <div style="height: 1px; background: var(--color-border); margin: 18px 0;"></div>
+        <div style="display: flex; justify-content: space-between; font-size: 17px; margin-bottom: 26px;"><span>Total</span><span>{{ totalLabel }}</span></div>
+        <button onClick="{{ placeOrder }}" style="width: 100%; font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px; border-radius: 2px; border: 1px solid var(--color-ink); background: var(--color-ink); color: var(--color-bg); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-espresso); border-color: var(--color-espresso);">Place Order</button>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ CONFIRMATION ============ -->
+  <sc-if value="{{ isConfirmation }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 760px; margin: 0 auto; padding: 90px 32px 120px; text-align: center; animation: rlfade 0.4s ease;">
+    <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-brass); font-weight: 600; margin-bottom: 20px;">Order Confirmed</div>
+    <h1 style="font-family: var(--font-serif-display); font-size: 46px; margin: 0 0 18px; font-weight: 400;">Thank you.</h1>
+    <p style="font-size: 17px; line-height: 1.7; color: var(--color-text-secondary); margin: 0 0 10px;">Your order <strong style="color: var(--color-ink);">{{ order.number }}</strong> is confirmed.</p>
+    <p style="font-size: 15px; color: var(--color-text-secondary); margin: 0 0 44px;">A confirmation has been sent to {{ order.email }}.</p>
+    <div style="border: 1px solid var(--color-border); text-align: left; padding: 32px; margin-bottom: 36px;">
+      <sc-for list="{{ order.lines }}" as="l" hint-placeholder-count="2">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--color-border);">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 56px; height: 56px; background: {{ l.gradient }};"></div>
+            <div><div style="font-family: var(--font-serif-display); font-size: 16px;">{{ l.name }}</div><div style="font-size: 12px; color: var(--color-text-secondary);">{{ l.variant }} · Qty {{ l.qty }}</div></div>
+          </div>
+          <div style="font-size: 15px;">{{ l.priceLabel }}</div>
+        </div>
+      </sc-for>
+      <div style="display: flex; justify-content: space-between; font-size: 18px; padding-top: 20px;"><span>Total</span><span>{{ order.totalLabel }}</span></div>
+    </div>
+    <button onClick="{{ goHome }}" style="font-family: var(--font-sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px 34px; border-radius: 2px; border: 1px solid var(--color-ink); background: transparent; color: var(--color-ink); cursor: pointer; transition: var(--transition-hover);" style-hover="background: var(--color-ink); color: var(--color-bg);">Continue Shopping</button>
+  </div>
+  </sc-if>
+
+  <!-- ============ JOURNAL ============ -->
+  <sc-if value="{{ isJournal }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 56px 32px 96px; animation: rlfade 0.4s ease;">
+    <div style="text-align: center; margin-bottom: 44px;">
+      <div style="font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-brass); font-weight: 600; margin-bottom: 14px;">The Journal</div>
+      <h1 style="font-family: var(--font-serif-display); font-size: 46px; margin: 0; font-weight: 400;">Inspiration Lives Here</h1>
+    </div>
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px;">
+      <sc-for list="{{ blogTags }}" as="t" hint-placeholder-count="5">
+        <button onClick="{{ t.onClick }}" style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.04em; padding: 9px 18px; border-radius: 999px; cursor: pointer; background: {{ t.bg }}; color: {{ t.color }}; border: 1px solid {{ t.border }}; transition: var(--transition-hover);">{{ t.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px 32px;">
+      <sc-for list="{{ journalPosts }}" as="post" hint-placeholder-count="6">
+        <div onClick="{{ post.onOpen }}" style="cursor: pointer;">
+          <div style="aspect-ratio: 3/2; background: {{ post.gradient }}; margin-bottom: 18px;"></div>
+          <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 10px;">{{ post.tagsLabel }} · {{ post.dateLabel }}</div>
+          <div style="font-family: var(--font-serif-display); font-size: 22px; line-height: 1.3; margin-bottom: 10px;">{{ post.title }}</div>
+          <div style="font-size: 14px; line-height: 1.6; color: var(--color-text-secondary);">{{ post.excerpt }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ POST ============ -->
+  <sc-if value="{{ isPost }}" hint-placeholder-val="{{ false }}">
+  <div style="animation: rlfade 0.4s ease;">
+    <div style="max-width: 760px; margin: 0 auto; padding: 48px 32px 20px;">
+      <div style="display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 32px;">
+        <span onClick="{{ goJournal }}" style="cursor: pointer;">Journal</span><span>/</span><span style="color: var(--color-ink);">{{ curPost.title }}</span>
+      </div>
+      <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px; text-align: center;">{{ curPost.tagsLabel }} · {{ curPost.dateLabel }}</div>
+      <h1 style="font-family: var(--font-serif-display); font-size: 44px; line-height: 1.15; margin: 0 0 32px; font-weight: 400; text-align: center;">{{ curPost.title }}</h1>
+    </div>
+    <div style="max-width: 1000px; margin: 0 auto; padding: 0 32px;">
+      <div style="aspect-ratio: 21/9; background: {{ curPost.gradient }}; margin-bottom: 48px;"></div>
+    </div>
+    <div style="max-width: 680px; margin: 0 auto; padding: 0 32px;">
+      <sc-for list="{{ curPost.body }}" as="para" hint-placeholder-count="4">
+        <p style="font-size: 17px; line-height: 1.8; color: var(--color-ink); margin: 0 0 24px;">{{ para.text }}</p>
+      </sc-for>
+    </div>
+    <div style="max-width: 1440px; margin: 0 auto; padding: 80px 32px 40px;">
+      <div style="height: 1px; background: var(--color-border); margin-bottom: 40px;"></div>
+      <h2 style="font-family: var(--font-serif-display); font-size: 28px; margin: 0 0 32px; font-weight: 400;">Related Reading</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+        <sc-for list="{{ curPost.related }}" as="post" hint-placeholder-count="3">
+          <div onClick="{{ post.onOpen }}" style="cursor: pointer;">
+            <div style="aspect-ratio: 3/2; background: {{ post.gradient }}; margin-bottom: 16px;"></div>
+            <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 8px;">{{ post.tagsLabel }}</div>
+            <div style="font-family: var(--font-serif-display); font-size: 19px; line-height: 1.3;">{{ post.title }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- FOOTER -->
+  <div style="background: var(--color-espresso); color: var(--color-bg-alt); margin-top: 40px;">
+    <div style="max-width: 1440px; margin: 0 auto; padding: 80px 32px;">
+      <div style="display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;">
+        <div>
+          <div style="font-family: var(--font-serif-display); font-size: 24px; margin-bottom: 18px;">Root Level</div>
+          <p style="font-size: 14px; line-height: 1.7; opacity: 0.7; max-width: 280px;">Handcrafted lighting, furniture, and objects. Made to be lived with — and passed on.</p>
+        </div>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Shop</div>
+          <div onClick="{{ goLighting }}" style="font-size: 13px; opacity: 0.75; margin-bottom: 12px; cursor: pointer;">Lighting</div>
+          <div onClick="{{ goFurniture }}" style="font-size: 13px; opacity: 0.75; margin-bottom: 12px; cursor: pointer;">Furniture</div>
+          <div onClick="{{ goDecor }}" style="font-size: 13px; opacity: 0.75; margin-bottom: 12px; cursor: pointer;">Decor</div>
+          <div onClick="{{ goShopAll }}" style="font-size: 13px; opacity: 0.75; cursor: pointer;">All Furnishings</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Company</div>
+          <div style="font-size: 13px; opacity: 0.75; margin-bottom: 12px;">Our Heritage</div>
+          <div style="font-size: 13px; opacity: 0.75; margin-bottom: 12px;">Trade Program</div>
+          <div onClick="{{ goJournal }}" style="font-size: 13px; opacity: 0.75; margin-bottom: 12px; cursor: pointer;">Journal</div>
+          <div style="font-size: 13px; opacity: 0.75;">Contact</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-brass); margin-bottom: 16px;">Service</div>
+          <div style="font-size: 13px; opacity: 0.75; margin-bottom: 12px;">Shipping & Delivery</div>
+          <div style="font-size: 13px; opacity: 0.75; margin-bottom: 12px;">Care & Warranty</div>
+          <div style="font-size: 13px; opacity: 0.75;">Returns</div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(239,235,227,0.18); margin-top: 56px; padding-top: 24px; display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6;">
+        <span>© 2026 Root Level</span>
+        <span>Est. 2006 · Handcrafted</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <sc-if value="{{ showToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: var(--color-ink); color: var(--color-bg); font-size: 13px; letter-spacing: 0.02em; padding: 14px 24px; border-radius: 2px; box-shadow: 0 12px 40px rgba(25,23,20,0.16); z-index: 200;">{{ toastMsg }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view: 'home',
+    productSlug: null,
+    cart: [],
+    fCategory: 'all',
+    fFinishes: [],
+    fPriceMax: 2600,
+    fSearch: '',
+    pFinish: 0, pSize: 0, pQty: 1,
+    postSlug: null,
+    blogTag: 'all',
+    order: null,
+    toast: null,
+  };
+
+  categories = [
+    { slug: 'lighting', title: 'Lighting', grad: ['#C9B79C', '#8A6E45'] },
+    { slug: 'furniture', title: 'Furniture', grad: ['#D6C7B0', '#8C7457'] },
+    { slug: 'decor', title: 'Decor', grad: ['#DED4C3', '#9C7A45'] },
+    { slug: 'mirrors', title: 'Mirrors', grad: ['#D7CEBE', '#6B4E2E'] },
+  ];
+
+  products = [
+    { slug: 'aurelia-chandelier', name: 'Aurelia Chandelier', category: 'lighting', price: 2480, dims: '34"W × 34"D × 41"H', sku: 'RL-LC-0410', isNew: true, tone: ['#C9B79C', '#8A6E45'],
+      blurb: 'A cascade of hand-fitted glass rods suspended on an antique-brass frame.',
+      finishes: [{ name: 'Antique Brass', hex: '#9C7A45' }, { name: 'Bronze', hex: '#6B4E2E' }, { name: 'Polished Nickel', hex: '#AEB0AC' }],
+      sizes: [{ label: 'Small', mod: 0 }, { label: 'Medium', mod: 560 }, { label: 'Large', mod: 1240 }],
+      desc: ['Aurelia gathers light the way a chandelier should — softly, and from every angle. Each glass rod is cut and polished by hand, then hung in a slow descending spiral.', 'The frame is solid brass, finished to a warm matte that deepens with age. No two pieces patina quite the same way.'] },
+    { slug: 'halden-pendant', name: 'Halden Pendant', category: 'lighting', price: 940, dims: '18"Dia × 22"H', sku: 'RL-LP-0221', isNew: false, tone: ['#D8CDBB', '#9C7A45'],
+      blurb: 'A single blown-glass globe cradled in a slim metal yoke.',
+      finishes: [{ name: 'Antique Brass', hex: '#9C7A45' }, { name: 'Blackened Steel', hex: '#2A2724' }],
+      sizes: [{ label: 'Small', mod: 0 }, { label: 'Large', mod: 220 }],
+      desc: ['Halden is quiet by design — one hand-blown globe, one clean line of metal. It reads as a single gesture from across the room.', 'Hung alone over a bath, or in a run of three above an island, it keeps the same easy presence.'] },
+    { slug: 'marlowe-table-lamp', name: 'Marlowe Table Lamp', category: 'lighting', price: 620, dims: '16"W × 28"H', sku: 'RL-TL-0188', isNew: true, tone: ['#E0D6C4', '#B79A6A'],
+      blurb: 'A turned-wood column under a linen shade, casting warm downward light.',
+      finishes: [{ name: 'Natural Oak', hex: '#C9A87C' }, { name: 'Blackened Steel', hex: '#2A2724' }],
+      sizes: [],
+      desc: ['Marlowe is a lamp for a bedside or a console — low, warm, and unhurried. The column is turned from a single piece of oak.', 'The linen shade is sewn in-house and softens the light to something closer to candlelight than a bulb.'] },
+    { slug: 'cove-wall-sconce', name: 'Cove Wall Sconce', category: 'lighting', price: 380, dims: '6"W × 14"H', sku: 'RL-WS-0142', isNew: false, tone: ['#CFC3AE', '#7C6136'],
+      blurb: 'A quiet half-moon of light thrown against the wall.',
+      finishes: [{ name: 'Antique Brass', hex: '#9C7A45' }, { name: 'Bronze', hex: '#6B4E2E' }],
+      sizes: [],
+      desc: ['Cove hides its source and shows only the glow — a soft arc of light that grazes the wall on either side.', 'Mounted in pairs along a hallway, it does the work of a much larger fixture without ever drawing the eye.'] },
+    { slug: 'senna-lounge-chair', name: 'Senna Lounge Chair', category: 'furniture', price: 1980, dims: '30"W × 34"D × 31"H', sku: 'RL-LC-0507', isNew: false, tone: ['#D6C7B0', '#8C7457'],
+      blurb: 'Low, deep, and enveloping — shearling over a solid ash frame.',
+      finishes: [{ name: 'Ivory Shearling', hex: '#E7DFD0' }, { name: 'Fawn', hex: '#C9A87C' }],
+      sizes: [],
+      desc: ['Senna is built to be sunk into. The seat is deep, the back reclined just enough, and the whole chair sits low to the floor.', 'The frame is solid ash; the shearling is full-hide, not a facing. It softens beautifully with use.'] },
+    { slug: 'delford-console', name: 'Delford Console', category: 'furniture', price: 2240, dims: '60"W × 16"D × 32"H', sku: 'RL-CN-0333', isNew: true, tone: ['#CDBB9E', '#6B4E2E'],
+      blurb: 'A long oak console with hand-cast bronze pulls.',
+      finishes: [{ name: 'Natural Oak', hex: '#C9A87C' }, { name: 'Bronze', hex: '#6B4E2E' }],
+      sizes: [],
+      desc: ['Delford is a workhorse dressed as a gallery piece — a long, low console with two soft-close drawers and an open shelf below.', 'The pulls are cast one at a time in bronze, each with a slightly different hand-finished face.'] },
+    { slug: 'brannon-coffee-table', name: 'Brannon Coffee Table', category: 'furniture', price: 1460, dims: '48"W × 28"D × 16"H', sku: 'RL-CT-0290', isNew: false, tone: ['#DCD3C2', '#5C5750'],
+      blurb: 'Honed travertine floating on a blackened-steel base.',
+      finishes: [{ name: 'Blackened Steel', hex: '#2A2724' }, { name: 'Antique Brass', hex: '#9C7A45' }],
+      sizes: [{ label: 'Small', mod: 0 }, { label: 'Large', mod: 380 }],
+      desc: ['Brannon pairs the weight of stone with the lightness of a thin steel frame. The travertine is honed to a matte, chalky finish.', 'The base is welded and finished by hand, then set slightly inboard so the top appears to float.'] },
+    { slug: 'ostend-bench', name: 'Ostend Bench', category: 'furniture', price: 1120, dims: '54"W × 18"D × 18"H', sku: 'RL-BN-0261', isNew: false, tone: ['#D9CBB2', '#A0855E'],
+      blurb: 'A single plank of oak resting on tapered legs.',
+      finishes: [{ name: 'Natural Oak', hex: '#C9A87C' }, { name: 'Blackened Steel', hex: '#2A2724' }],
+      sizes: [{ label: '54 in', mod: 0 }, { label: '72 in', mod: 340 }],
+      desc: ['Ostend is about as simple as furniture gets — one thick plank, four tapered legs, nothing else.', 'At the foot of a bed or along an entry wall, it earns its place by staying out of the way.'] },
+    { slug: 'vidra-vase', name: 'Vidra Vase', category: 'decor', price: 240, dims: '8"Dia × 14"H', sku: 'RL-OB-0119', isNew: false, tone: ['#DED4C3', '#9C7A45'],
+      blurb: 'Matte stoneware with a soft, uneven hand-poured glaze.',
+      finishes: [{ name: 'Alabaster', hex: '#E7DFD0' }, { name: 'Sand', hex: '#C9A87C' }],
+      sizes: [{ label: 'Small', mod: 0 }, { label: 'Medium', mod: 80 }, { label: 'Large', mod: 180 }],
+      desc: ['Vidra is thrown on the wheel and glazed by hand, so the surface breaks and pools in a way no two share.', 'Full of branches or empty on a shelf, it holds its own as a quiet object.'] },
+    { slug: 'torres-bookends', name: 'Torres Bookends', category: 'decor', price: 190, dims: '5"W × 6"H each', sku: 'RL-OB-0126', isNew: true, tone: ['#CBB897', '#7C6136'],
+      blurb: 'A pair of solid cast-bronze forms with a warm patina.',
+      finishes: [{ name: 'Bronze', hex: '#6B4E2E' }],
+      sizes: [],
+      desc: ['Sold as a pair, Torres bookends are cast solid — they have real heft, and they hold a shelf of books without complaint.', 'The patina is applied by hand and left to settle, so each face is slightly its own.'] },
+    { slug: 'lindus-floor-mirror', name: 'Lindus Floor Mirror', category: 'mirrors', price: 1280, dims: '32"W × 76"H', sku: 'RL-MR-0402', isNew: false, tone: ['#D7CEBE', '#9C7A45'],
+      blurb: 'A full-length mirror framed in slim antique brass.',
+      finishes: [{ name: 'Antique Brass', hex: '#9C7A45' }, { name: 'Bronze', hex: '#6B4E2E' }],
+      sizes: [],
+      desc: ['Lindus leans, rather than hangs — a full-length mirror in a narrow brass frame that reflects far more room than it takes up.', 'The glass is antiqued just slightly at the edges, softening the reflection without clouding it.'] },
+    { slug: 'fenwick-round-mirror', name: 'Fenwick Round Mirror', category: 'mirrors', price: 680, dims: '34"Dia', sku: 'RL-MR-0388', isNew: true, tone: ['#D2C6B0', '#6B4E2E'],
+      blurb: 'A perfect circle with a hand-finished bronze rim.',
+      finishes: [{ name: 'Bronze', hex: '#6B4E2E' }, { name: 'Blackened Steel', hex: '#2A2724' }],
+      sizes: [{ label: '34 in', mod: 0 }, { label: '44 in', mod: 260 }],
+      desc: ['Fenwick is a clean circle — no bevel, no ornament, just a hand-finished metal rim around a plain round glass.', 'Over a vanity or a mantel, it reads as an object first and a mirror second.'] },
+  ];
+
+  posts = [
+    { slug: 'weight-of-a-good-object', title: 'The Weight of a Good Object', date: 'Jun 2026', tags: ['Materials', 'Design Notes'], tone: ['#CBB897', '#7C6136'],
+      excerpt: 'Why we cast solid when we could cast hollow — and what heft has to do with how long you keep a thing.',
+      body: ['There is a moment, picking up a well-made object, when your hand expects one thing and receives another. It is heavier than it looks. That small surprise is the beginning of trust.',
+        'We cast our bronze pieces solid. It costs more, ships heavier, and takes longer to patina evenly. It would be easy to hollow them and save on all three. We do not, because weight is the first quiet argument an object makes for its own permanence.',
+        'A thing that feels substantial gets treated as substantial. It is set down carefully, kept, handed on. Lightness has its place — but not here, not in the objects meant to outlast the room they arrive in.'] },
+    { slug: 'living-with-brass', title: 'Living With Brass', date: 'May 2026', tags: ['At Home', 'Materials'], tone: ['#D8CDBB', '#9C7A45'],
+      excerpt: 'Brass is not a finish that stays still. A short guide to letting it age the way it wants to.',
+      body: ['Unlacquered brass is a living surface. It arrives bright, warms to gold, and over years settles into a deep, even bronze. Some people fight this. We would rather you let it happen.',
+        'The patina is not dirt. It is oxidation — a thin, protective, entirely natural film that records where the piece has been touched and where the light has fallen. A doorknob wears differently than a lamp base, and that difference is the point.',
+        'If you want to slow it down, keep the surface dry and dust it with a soft cloth. If you want to reset it, a cut lemon and a little salt will take it back to bright. But our advice, most days, is simply to leave it alone.'] },
+    { slug: 'notes-from-the-bench', title: 'Notes from the Bench', date: 'Apr 2026', tags: ['Behind the Studio', 'Craft'], tone: ['#D9CBB2', '#A0855E'],
+      excerpt: 'A day in the joinery, where the difference between fine and finished is measured in fractions.',
+      body: ['The oak arrives rough-sawn and sits in the racks for months before anyone touches it. Wood that is rushed will move later, and a console that moves is a console that fails.',
+        'When a plank is finally chosen, it is planed, jointed, and dry-fit — twice — before any glue is mixed. The tapered legs on the Ostend bench are cut on a hand-guided jig, then pared to the line with a chisel.',
+        'None of this is visible in the finished piece. That is rather the point. Good joinery disappears; you notice only that nothing creaks, nothing racks, and the whole thing feels like it was grown rather than assembled.'] },
+    { slug: 'light-a-room-slowly', title: 'How to Light a Room Slowly', date: 'Mar 2026', tags: ['At Home', 'Design Notes'], tone: ['#E0D6C4', '#B79A6A'],
+      excerpt: 'One overhead fixture is a decision. Three sources at three heights is a room.',
+      body: ['Most rooms are lit from a single point in the ceiling, which is why most rooms feel flat after dark. Light wants to come from more than one place, and from below the eye as often as above it.',
+        'Start with a low source — a table lamp on a console, a pair of sconces at seated height. Add a middle layer, then let the overhead fixture do the least work of the three. The room gains depth the way a landscape does at dusk.',
+        'The goal is not brightness. It is having somewhere for the shadows to go. A well-lit room is mostly a room with good shadows.'] },
+    { slug: 'in-praise-of-the-unfinished', title: 'In Praise of the Unfinished', date: 'Feb 2026', tags: ['Craft', 'Materials'], tone: ['#DED4C3', '#9C7A45'],
+      excerpt: 'On matte glazes, raw edges, and the quiet confidence of leaving marks in.',
+      body: ['A perfectly uniform surface tells you a machine made it. A surface that breaks and pools and varies tells you a hand did. We tend to prefer the second, and we design toward it on purpose.',
+        'The Vidra vase is glazed by pouring, not spraying, so the glaze runs thicker at the base and thins toward the rim. The stoneware shows through where it wants to. This is not a flaw list; it is the finish.',
+        'There is a confidence in leaving the marks in — in trusting that the eye reads handmade as honest. The unfinished, done deliberately, is often the most finished thing in the room.'] },
+  ];
+
+  money(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  catTitle(slug) { const c = this.categories.find(c => c.slug === slug); return c ? c.title : 'All Furnishings'; }
+  grad(t) { return 'linear-gradient(135deg, ' + t[0] + ' 0%, ' + t[1] + ' 100%)'; }
+  scrollTop() { try { window.scrollTo(0, 0); const el = document.scrollingElement || document.documentElement; if (el) el.scrollTop = 0; } catch (e) {} }
+  nav(patch) { this.setState(patch); this.scrollTop(); }
+
+  curProduct() { return this.products.find(p => p.slug === this.state.productSlug); }
+  curPostObj() { return this.posts.find(p => p.slug === this.state.postSlug); }
+
+  addToCart() {
+    const p = this.curProduct(); if (!p) return;
+    const f = p.finishes[this.state.pFinish];
+    const s = p.sizes.length ? p.sizes[this.state.pSize] : null;
+    const unit = p.price + (s ? s.mod : 0);
+    const variant = [f && f.name, s && s.label].filter(Boolean).join(' / ');
+    const key = p.slug + '|' + variant;
+    const cart = this.state.cart.map(l => ({ ...l }));
+    const ex = cart.find(l => l.key === key);
+    if (ex) ex.qty += this.state.pQty;
+    else cart.push({ key, slug: p.slug, name: p.name, variant, sku: p.sku, unit, qty: this.state.pQty, gradient: this.grad(p.tone) });
+    this.setState({ cart, toast: 'Added to cart · ' + p.name });
+    clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: null }), 2400);
+  }
+  changeQty(key, d) {
+    let cart = this.state.cart.map(l => ({ ...l }));
+    const l = cart.find(x => x.key === key); if (!l) return;
+    l.qty += d; if (l.qty < 1) cart = cart.filter(x => x.key !== key);
+    this.setState({ cart });
+  }
+  removeLine(key) { this.setState({ cart: this.state.cart.filter(l => l.key !== key) }); }
+
+  placeOrder() {
+    const lines = this.state.cart.map(l => ({ ...l }));
+    const total = lines.reduce((s, l) => s + l.unit * l.qty, 0);
+    const number = 'RL-2026-' + String(Math.floor(1000 + Math.random() * 9000));
+    this.setState({ order: { number, email: 'ava.mercer@example.com', lines, total }, cart: [], view: 'confirmation' });
+    this.scrollTop();
+  }
+
+  renderVals() {
+    const st = this.state;
+    const money = (n) => this.money(n);
+    const grad = (t) => this.grad(t);
+    const cartCount = st.cart.reduce((s, l) => s + l.qty, 0);
+    const subtotal = st.cart.reduce((s, l) => s + l.unit * l.qty, 0);
+
+    // ---- shared nav handlers ----
+    const nav = {
+      goHome: () => this.nav({ view: 'home' }),
+      goShopAll: () => this.nav({ view: 'collection', fCategory: 'all', fFinishes: [], fPriceMax: 2600, fSearch: '' }),
+      goLighting: () => this.nav({ view: 'collection', fCategory: 'lighting', fFinishes: [], fSearch: '' }),
+      goFurniture: () => this.nav({ view: 'collection', fCategory: 'furniture', fFinishes: [], fSearch: '' }),
+      goDecor: () => this.nav({ view: 'collection', fCategory: 'decor', fFinishes: [], fSearch: '' }),
+      goSearch: () => this.nav({ view: 'collection', fCategory: 'all' }),
+      goJournal: () => this.nav({ view: 'journal' }),
+      goCart: () => this.nav({ view: 'cart' }),
+      goDelivery: () => this.nav({ view: 'delivery' }),
+      placeOrder: () => this.placeOrder(),
+    };
+
+    // ---- home ----
+    const categoryTiles = this.categories.map(c => ({
+      title: c.title, gradient: grad(c.grad),
+      count: this.products.filter(p => p.category === c.slug).length,
+      onOpen: () => this.nav({ view: 'collection', fCategory: c.slug, fFinishes: [], fSearch: '' }),
+    }));
+    const featured = this.products.filter(p => p.isNew).slice(0, 4).map(p => ({
+      name: p.name, dims: p.dims, isNew: true, priceLabel: money(p.price), gradient: grad(p.tone),
+      onOpen: () => this.nav({ view: 'product', productSlug: p.slug, pFinish: 0, pSize: 0, pQty: 1 }),
+    }));
+    const journalTeaser = this.posts.slice(0, 3).map(p => ({
+      title: p.title, excerpt: p.excerpt, tagsLabel: p.tags[0], gradient: grad(p.tone),
+      onOpen: () => this.nav({ view: 'post', postSlug: p.slug }),
+    }));
+
+    // ---- collection ----
+    let list = this.products.filter(p => {
+      if (st.fCategory !== 'all' && p.category !== st.fCategory) return false;
+      if (st.fFinishes.length && !p.finishes.some(f => st.fFinishes.includes(f.name))) return false;
+      if (p.price > st.fPriceMax) return false;
+      if (st.fSearch) { const q = st.fSearch.toLowerCase(); if (!(p.name.toLowerCase().includes(q) || p.blurb.toLowerCase().includes(q))) return false; }
+      return true;
+    });
+    const products = list.map(p => ({
+      name: p.name, dims: p.dims, sku: p.sku, isNew: p.isNew, priceLabel: money(p.price), gradient: grad(p.tone),
+      onOpen: () => this.nav({ view: 'product', productSlug: p.slug, pFinish: 0, pSize: 0, pQty: 1 }),
+    }));
+    const facetCategories = [{ slug: 'all', title: 'All Furnishings' }].concat(this.categories).map(c => {
+      const active = st.fCategory === c.slug;
+      return { label: c.title, color: active ? 'var(--color-brass)' : 'var(--color-ink)', onClick: () => this.setState({ fCategory: c.slug }) };
+    });
+    const allFinishes = [];
+    this.products.forEach(p => p.finishes.forEach(f => { if (!allFinishes.find(x => x.name === f.name)) allFinishes.push(f); }));
+    const facetFinishes = allFinishes.map(f => {
+      const on = st.fFinishes.includes(f.name);
+      return {
+        name: f.name, hex: f.hex,
+        boxBg: on ? 'var(--color-ink)' : 'transparent',
+        tickBg: on ? 'var(--color-bg)' : 'transparent',
+        onToggle: () => {
+          const set = st.fFinishes.includes(f.name) ? st.fFinishes.filter(x => x !== f.name) : st.fFinishes.concat(f.name);
+          this.setState({ fFinishes: set });
+        },
+      };
+    });
+
+    // ---- product ----
+    const p = this.curProduct();
+    let cur = null;
+    if (p) {
+      const selSize = p.sizes.length ? p.sizes[st.pSize] : null;
+      const price = p.price + (selSize ? selSize.mod : 0);
+      cur = {
+        name: p.name, dims: p.dims, sku: p.sku, blurb: p.blurb, gradient: grad(p.tone),
+        categoryLabel: this.catTitle(p.category),
+        onCategory: () => this.nav({ view: 'collection', fCategory: p.category, fFinishes: [], fSearch: '' }),
+        priceLabel: money(price),
+        finishLabel: p.finishes[st.pFinish] ? p.finishes[st.pFinish].name : '',
+        qty: st.pQty,
+        hasSizes: p.sizes.length > 0,
+        thumbs: [p.tone, [p.tone[1], p.tone[0]], [p.tone[0], '#EFEBE3'], ['#EFEBE3', p.tone[1]]].map(t => ({ gradient: grad(t) })),
+        finishes: p.finishes.map((f, i) => ({ name: f.name, hex: f.hex, ring: i === st.pFinish ? '0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-ink)' : 'none', onSelect: () => this.setState({ pFinish: i }) })),
+        sizes: p.sizes.map((s, i) => {
+          const on = i === st.pSize;
+          return { label: s.label, bg: on ? 'var(--color-ink)' : 'transparent', color: on ? 'var(--color-bg)' : 'var(--color-ink)', border: on ? 'var(--color-ink)' : 'var(--color-border)', onSelect: () => this.setState({ pSize: i }) };
+        }),
+        description: p.desc.map(text => ({ text })),
+        onDec: () => this.setState({ pQty: Math.max(1, st.pQty - 1) }),
+        onInc: () => this.setState({ pQty: st.pQty + 1 }),
+        onAdd: () => this.addToCart(),
+      };
+    }
+
+    // ---- cart lines ----
+    const cartLines = st.cart.map(l => ({
+      name: l.name, variant: l.variant, sku: l.sku, qty: l.qty, gradient: l.gradient, priceLabel: money(l.unit * l.qty),
+      onInc: () => this.changeQty(l.key, 1), onDec: () => this.changeQty(l.key, -1), onRemove: () => this.removeLine(l.key),
+    }));
+
+    // ---- blog ----
+    const tagNames = ['All', 'Craft', 'Materials', 'At Home', 'Design Notes', 'Behind the Studio'];
+    const blogTags = tagNames.map(t => {
+      const val = t === 'All' ? 'all' : t;
+      const on = st.blogTag === val;
+      return { label: t, bg: on ? 'var(--color-ink)' : 'transparent', color: on ? 'var(--color-bg)' : 'var(--color-ink)', border: on ? 'var(--color-ink)' : 'var(--color-border)', onClick: () => this.setState({ blogTag: val }) };
+    });
+    const blogList = this.posts.filter(po => st.blogTag === 'all' || po.tags.includes(st.blogTag));
+    const journalPosts = blogList.map(po => ({
+      title: po.title, excerpt: po.excerpt, dateLabel: po.date, tagsLabel: po.tags.join(' · '), gradient: grad(po.tone),
+      onOpen: () => this.nav({ view: 'post', postSlug: po.slug }),
+    }));
+
+    // ---- single post ----
+    const po = this.curPostObj();
+    let curPost = null;
+    if (po) {
+      const related = this.posts.filter(x => x.slug !== po.slug && x.tags.some(t => po.tags.includes(t))).slice(0, 3).map(x => ({
+        title: x.title, tagsLabel: x.tags[0], gradient: grad(x.tone), onOpen: () => this.nav({ view: 'post', postSlug: x.slug }),
+      }));
+      curPost = { title: po.title, dateLabel: po.date, tagsLabel: po.tags.join(' · '), gradient: grad(po.tone), body: po.body.map(text => ({ text })), related };
+    }
+
+    return {
+      ...nav,
+      isHome: st.view === 'home', isCollection: st.view === 'collection', isProduct: st.view === 'product',
+      isCart: st.view === 'cart', isDelivery: st.view === 'delivery', isConfirmation: st.view === 'confirmation',
+      isJournal: st.view === 'journal', isPost: st.view === 'post',
+      cartCount,
+      categoryTiles, featured, journalTeaser,
+      collectionTitle: this.catTitle(st.fCategory),
+      resultLabel: products.length + (products.length === 1 ? ' piece' : ' pieces'),
+      products, hasResults: products.length > 0, noResults: products.length === 0,
+      facetCategories, facetFinishes,
+      searchValue: st.fSearch, onSearch: (e) => this.setState({ fSearch: e.target.value }),
+      priceMax: st.fPriceMax, priceMaxLabel: money(st.fPriceMax), onPrice: (e) => this.setState({ fPriceMax: Number(e.target.value) }),
+      clearFilters: () => this.setState({ fCategory: 'all', fFinishes: [], fPriceMax: 2600, fSearch: '' }),
+      cur,
+      cartLines, cartEmpty: st.cart.length === 0, cartHasItems: st.cart.length > 0,
+      subtotalLabel: money(subtotal), totalLabel: money(subtotal),
+      order: st.order ? { number: st.order.number, email: st.order.email, totalLabel: money(st.order.total), lines: st.order.lines.map(l => ({ name: l.name, variant: l.variant, qty: l.qty, gradient: l.gradient, priceLabel: money(l.unit * l.qty) })) } : null,
+      blogTags, journalPosts, curPost,
+      showToast: !!st.toast, toastMsg: st.toast || '',
+    };
+  }
+}
+</script>
+</body>
+</html>

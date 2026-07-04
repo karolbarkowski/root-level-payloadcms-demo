@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm view *)",
+      "Bash(NODE_OPTIONS=\"--no-deprecation --import=tsx/esm\" tsx src/seed/_check.mts)"
+    ]
+  }
+}

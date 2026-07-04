@@ -1,0 +1,107 @@
+/* App-level helpers layered on top of the Root Level design system.
+   The design system (../styles/design-system.css) owns tokens + components;
+   these are small storefront-specific utilities the prototype expressed as
+   inline styles. */
+
+.rl-nav-util {
+  color: var(--color-ink);
+  transition: var(--transition-hover);
+}
+.rl-nav-util:hover {
+  color: var(--color-brass);
+}
+
+/* Collection sidebar facet section heading */
+.rl-facet-head {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Media placeholder / real image inside a gradient tile */
+.rl-media {
+  position: relative;
+  overflow: hidden;
+}
+.rl-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Page view fade — mirrors the prototype's rlfade */
+@keyframes rlfade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rl-view {
+  animation: rlfade 0.4s var(--ease-standard);
+}
+
+/* Rich-text body (product story / journal posts) */
+.rl-richtext p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--color-ink);
+  margin: 0 0 24px;
+}
+.rl-richtext h2 {
+  font-family: var(--font-serif-display);
+  font-size: 28px;
+  margin: 40px 0 16px;
+  font-weight: 400;
+}
+.rl-richtext h3 {
+  font-family: var(--font-serif-display);
+  font-size: 22px;
+  margin: 32px 0 12px;
+  font-weight: 400;
+}
+.rl-richtext ul,
+.rl-richtext ol {
+  padding-left: 22px;
+  margin: 0 0 24px;
+}
+.rl-richtext li {
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+.rl-richtext a {
+  color: var(--color-brass);
+  border-bottom: 1px solid var(--color-brass);
+}
+.rl-richtext strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* Product-story variant (denser, secondary colour) used on the PDP */
+.rl-richtext--pdp p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  margin: 0 0 16px;
+}
+
+/* Responsive: collapse the two-column shopping layouts on narrow screens */
+@media (max-width: 900px) {
+  .rl-two-col {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .rl-two-col > .rl-sticky {
+    position: static !important;
+  }
+}
