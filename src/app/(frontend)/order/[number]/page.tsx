@@ -31,7 +31,7 @@ export default async function OrderConfirmationPage({ params }: { params: Promis
     item.product && typeof item.product === 'object' ? item.product.slug ?? item.name : item.name
 
   return (
-    <div className="rl-view" style={{ maxWidth: 760, margin: '0 auto', padding: '90px 32px 120px', textAlign: 'center' }}>
+    <div style={{ maxWidth: 760, margin: '0 auto', padding: '90px 32px 120px', textAlign: 'center' }}>
       <div className="rl-eyebrow" style={{ marginBottom: 20 }}>
         Order Confirmed
       </div>

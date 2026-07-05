@@ -1,10 +1,33 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { useCart } from './CartProvider'
+
+const EXIT_MS = 260
 
 export function Toast() {
   const { toast } = useCart()
-  if (!toast) return null
+  // Keep the last message rendered through the exit animation so it fades out
+  // instead of vanishing. `visible` drives the enter/leave state.
+  const [message, setMessage] = useState<string | null>(toast)
+  const [visible, setVisible] = useState(false)
+  const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    if (exitTimer.current) clearTimeout(exitTimer.current)
+    if (toast) {
+      setMessage(toast)
+      // Next frame so the enter transition runs from the hidden state.
+      const raf = requestAnimationFrame(() => setVisible(true))
+      return () => cancelAnimationFrame(raf)
+    }
+    // Toast cleared: play the exit, then drop the node from the DOM.
+    setVisible(false)
+    exitTimer.current = setTimeout(() => setMessage(null), EXIT_MS)
+  }, [toast])
+
+  if (!message) return null
+
   return (
     <div
       role="status"
@@ -13,7 +36,9 @@ export function Toast() {
         position: 'fixed',
         bottom: 28,
         left: '50%',
-        transform: 'translateX(-50%)',
+        transform: `translate(-50%, ${visible ? '0' : '12px'})`,
+        opacity: visible ? 1 : 0,
+        transition: `opacity ${EXIT_MS}ms var(--ease-standard), transform ${EXIT_MS}ms var(--ease-standard)`,
         background: 'var(--color-ink)',
         color: 'var(--color-bg)',
         fontSize: 13,
@@ -24,7 +49,7 @@ export function Toast() {
         zIndex: 200,
       }}
     >
-      {toast}
+      {message}
     </div>
   )
 }

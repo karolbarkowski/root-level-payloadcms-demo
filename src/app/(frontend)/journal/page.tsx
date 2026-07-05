@@ -18,7 +18,7 @@ export default async function JournalPage({
   const pills = [{ slug: 'all', title: 'All' }, ...tags.map((t) => ({ slug: t.slug, title: t.title }))]
 
   return (
-    <div className="rl-container rl-view" style={{ padding: '56px 32px 96px' }}>
+    <div className="rl-container" style={{ padding: '56px 32px 96px' }}>
       <div style={{ textAlign: 'center', marginBottom: 44 }}>
         <div className="rl-eyebrow" style={{ marginBottom: 14 }}>
           The Journal
@@ -44,9 +44,9 @@ export default async function JournalPage({
       </div>
 
       {filtered.length > 0 ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '44px 32px' }}>
+        <div className="rl-stagger" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '44px 32px' }}>
           {filtered.map((post) => (
-            <Link key={post.id} href={`/journal/${post.slug}`}>
+            <Link key={post.id} href={`/journal/${post.slug}`} className="rl-tile">
               <div className="rl-media" style={{ aspectRatio: '3 / 2', background: gradientFor(post.slug), marginBottom: 18 }}>
                 {post.coverUrl && <img src={post.coverUrl} alt={post.title} />}
               </div>

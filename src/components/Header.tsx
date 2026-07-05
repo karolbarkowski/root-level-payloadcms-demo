@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import { useCart } from './CartProvider'
 
 const NAV = [
@@ -16,6 +17,38 @@ export function Header() {
   const { count, hydrated } = useCart()
   const pathname = usePathname()
 
+  // Cart-count pop: replay the animation whenever the count increases.
+  const prevCount = useRef(count)
+  const [popping, setPopping] = useState(false)
+  useEffect(() => {
+    if (count > prevCount.current) {
+      setPopping(true)
+      const t = setTimeout(() => setPopping(false), 320)
+      prevCount.current = count
+      return () => clearTimeout(t)
+    }
+    prevCount.current = count
+  }, [count])
+
+  // Sticky-header shrink once the page is scrolled (rAF-throttled).
+  const [scrolled, setScrolled] = useState(false)
+  useEffect(() => {
+    let raf = 0
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 24)
+        raf = 0
+      })
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
+
   return (
     <>
       {/* Utility bar */}
@@ -27,7 +60,7 @@ export function Header() {
       </div>
 
       {/* Header */}
-      <header className="rl-header">
+      <header className="rl-header" data-scrolled={scrolled}>
         <div className="rl-container">
           <Link href="/" className="rl-wordmark">
             Root Level
@@ -56,7 +89,15 @@ export function Header() {
               style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}
               className="rl-nav-util"
             >
-              Cart ({hydrated ? count : 0})
+              Cart (
+              <span
+                key={count}
+                className={popping ? 'rl-pop' : undefined}
+                style={{ color: popping ? 'var(--color-brass)' : undefined }}
+              >
+                {hydrated ? count : 0}
+              </span>
+              )
             </Link>
           </div>
         </div>

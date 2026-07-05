@@ -50,7 +50,7 @@ export default async function ShopPage({
   const resultLabel = `${filtered.length} ${filtered.length === 1 ? 'piece' : 'pieces'}`
 
   return (
-    <div className="rl-container rl-view" style={{ padding: '40px 32px 96px' }}>
+    <div className="rl-container" style={{ padding: '40px 32px 96px' }}>
       <div className="rl-breadcrumb" style={{ marginBottom: 28 }}>
         <Link href="/">Home</Link>
         <span>/</span>
@@ -66,7 +66,7 @@ export default async function ShopPage({
 
         <div>
           {filtered.length > 0 ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 20px' }}>
+            <div className="rl-stagger" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '40px 20px' }}>
               {filtered.map((p) => (
                 <ProductCard key={p.id} product={p} showSku />
               ))}

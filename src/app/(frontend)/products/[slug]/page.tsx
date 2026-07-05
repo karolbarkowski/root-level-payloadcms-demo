@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getProductBySlug } from '@/lib/queries'
-import { gradientFor, thumbGradients } from '@/lib/gradient'
 import { ProductPurchase } from '@/components/ProductPurchase'
+import { ProductGallery } from '@/components/ProductGallery'
 import { RichText } from '@/components/RichText'
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -10,11 +10,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const product = await getProductBySlug(slug)
   if (!product) notFound()
 
-  const gallery = thumbGradients(product.slug)
   const categoryHref = product.categorySlug ? `/shop?category=${product.categorySlug}` : '/shop'
 
   return (
-    <div className="rl-container rl-view" style={{ padding: '40px 32px 96px' }}>
+    <div className="rl-container" style={{ padding: '40px 32px 96px' }}>
       <div className="rl-breadcrumb" style={{ marginBottom: 32 }}>
         <Link href="/">Home</Link>
         <span>/</span>
@@ -25,21 +24,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <div className="rl-two-col" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, alignItems: 'start' }}>
         {/* GALLERY */}
-        <div>
-          <div
-            className="rl-media"
-            style={{ aspectRatio: '1 / 1', background: gradientFor(product.slug), marginBottom: 14 }}
-          >
-            {product.imageUrls[0] && <img src={product.imageUrls[0]} alt={product.name} />}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
-            {gallery.map((g, i) => (
-              <div key={i} className="rl-media" style={{ aspectRatio: '1 / 1', background: g }}>
-                {product.imageUrls[i + 1] && <img src={product.imageUrls[i + 1]} alt={`${product.name} view ${i + 2}`} />}
-              </div>
-            ))}
-          </div>
-        </div>
+        <ProductGallery slug={product.slug} name={product.name} imageUrls={product.imageUrls} />
 
         {/* INFO */}
         <div className="rl-sticky" style={{ position: 'sticky', top: 110 }}>

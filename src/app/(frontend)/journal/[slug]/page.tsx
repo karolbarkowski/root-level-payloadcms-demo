@@ -18,7 +18,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const meta = [post.tags.map((t) => t.title).join(' · '), formatPostDate(post.publishedAt)].filter(Boolean).join(' · ')
 
   return (
-    <div className="rl-view">
+    <div>
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '48px 32px 20px' }}>
         <div className="rl-breadcrumb" style={{ marginBottom: 32 }}>
           <Link href="/journal">Journal</Link>

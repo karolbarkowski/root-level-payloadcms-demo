@@ -58,7 +58,7 @@ export default function CheckoutPage() {
   if (!hydrated || lines.length === 0) return null
 
   return (
-    <div className="rl-view" style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 96px' }}>
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 96px' }}>
       <div className="rl-breadcrumb" style={{ marginBottom: 28 }}>
         <Link href="/cart">Cart</Link>
         <span>/</span>

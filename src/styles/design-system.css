@@ -105,6 +105,15 @@
     background-color var(--duration-standard) var(--ease-standard),
     border-color var(--duration-standard) var(--ease-standard),
     opacity var(--duration-standard) var(--ease-standard);
+  /* Transform-aware motion (press feedback, swatch/pill scale, arrow nudge). */
+  --transition-transform: transform var(--duration-fast) var(--ease-standard);
+  --transition-interactive:
+    color var(--duration-standard) var(--ease-standard),
+    background-color var(--duration-standard) var(--ease-standard),
+    border-color var(--duration-standard) var(--ease-standard),
+    opacity var(--duration-standard) var(--ease-standard),
+    box-shadow var(--duration-standard) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
 }
 
 /* 3. BASE / RESET ---------------------------------------------------------- */
@@ -125,6 +134,14 @@ img, svg, video { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; }
 ::selection { background: var(--color-brass); color: var(--color-bg); }
+
+/* Keyboard focus — refined brass ring, only for keyboard users (not mouse clicks). */
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
 
 /* 4. TYPOGRAPHY UTILITIES -------------------------------------------------- */
 .rl-h1, .rl-h2, .rl-h3, .rl-display {
@@ -209,10 +226,11 @@ button { font-family: inherit; }
   background: var(--color-ink);
   color: var(--color-bg);
   cursor: pointer;
-  transition: var(--transition-hover);
+  transition: var(--transition-interactive);
   white-space: nowrap;
 }
 .rl-btn:hover { background: var(--color-espresso); border-color: var(--color-espresso); }
+.rl-btn:active { transform: translateY(1px); }
 .rl-btn--secondary { background: transparent; color: var(--text-primary); border-color: var(--color-ink); }
 .rl-btn--secondary:hover { background: var(--color-ink); color: var(--color-bg); }
 .rl-btn--ghost { background: transparent; color: var(--text-primary); border-color: transparent; }
@@ -243,9 +261,10 @@ button { font-family: inherit; }
   border: 0;
   color: var(--color-ink);
   cursor: pointer;
-  transition: var(--transition-hover);
+  transition: var(--transition-interactive);
 }
 .rl-icon-btn:hover { color: var(--color-brass); }
+.rl-icon-btn:active { transform: scale(0.92); }
 
 /* 7. FORMS ----------------------------------------------------------------- */
 .rl-field { display: flex; flex-direction: column; gap: var(--space-2); }
@@ -339,9 +358,10 @@ button { font-family: inherit; }
   background: transparent;
   color: var(--color-ink);
   cursor: pointer;
-  transition: var(--transition-hover);
+  transition: var(--transition-interactive);
 }
 .rl-tag:hover { border-color: var(--color-brass); }
+.rl-tag:active { transform: scale(0.96); }
 .rl-tag[aria-pressed="true"], .rl-tag--selected {
   background: var(--color-ink);
   color: var(--color-bg);
@@ -355,9 +375,11 @@ button { font-family: inherit; }
   border: 1px solid var(--border-hairline);
   cursor: pointer;
   padding: 0;
-  transition: var(--transition-hover);
+  transition: var(--transition-interactive);
   position: relative;
 }
+.rl-swatch:hover { transform: scale(1.12); }
+.rl-swatch:active { transform: scale(1.0); }
 .rl-swatch[aria-pressed="true"] { box-shadow: 0 0 0 1px var(--color-bg), 0 0 0 2px var(--color-ink); }
 
 /* 9. CARDS & PRODUCT CARDS ------------------------------------------------- */
@@ -385,7 +407,14 @@ button { font-family: inherit; }
   color: var(--color-brass); border: 1px solid var(--color-brass);
   border-radius: var(--radius-pill); padding: 3px 10px; background: rgba(247,245,241,0.6);
 }
-.rl-product__name { font-family: var(--font-serif-display); font-size: 17px; color: var(--color-ink); margin-bottom: 4px; }
+.rl-product__name { font-family: var(--font-serif-display); font-size: 17px; color: var(--color-ink); margin-bottom: 4px; position: relative; display: inline-block; }
+.rl-product__name::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; height: 1px; width: 100%;
+  background: var(--color-brass);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-standard) var(--ease-standard);
+}
+.rl-product:hover .rl-product__name::after { transform: scaleX(1); }
 .rl-product__dims { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 2px; }
 .rl-product__sku { font-size: 11px; color: var(--color-text-secondary); letter-spacing: 0.04em; }
 .rl-product__price { font-size: 14px; color: var(--color-ink); margin-top: var(--space-2); }
@@ -404,15 +433,26 @@ button { font-family: inherit; }
   background: var(--surface-page);
   border-bottom: 1px solid var(--border-hairline);
   position: sticky; top: 0; z-index: 40;
+  transition: box-shadow var(--duration-standard) var(--ease-standard), background-color var(--duration-standard) var(--ease-standard);
 }
-.rl-header .rl-container { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.rl-header .rl-container { display: flex; align-items: center; justify-content: space-between; height: 76px; transition: height var(--duration-standard) var(--ease-standard); }
+.rl-header[data-scrolled="true"] { box-shadow: 0 1px 16px rgba(25, 23, 20, 0.06); }
+.rl-header[data-scrolled="true"] .rl-container { height: 60px; }
 .rl-wordmark { font-family: var(--font-serif-display); font-size: 24px; letter-spacing: 0.02em; color: var(--color-ink); }
 .rl-nav { display: flex; align-items: center; gap: var(--space-6); }
 .rl-nav a {
+  position: relative;
   font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--color-ink); transition: var(--transition-hover);
 }
+.rl-nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+  background: var(--color-brass);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--duration-standard) var(--ease-standard);
+}
 .rl-nav a:hover, .rl-nav a[aria-current="page"] { color: var(--color-brass); }
+.rl-nav a:hover::after, .rl-nav a[aria-current="page"]::after { transform: scaleX(1); }
 
 .rl-footer { background: var(--color-espresso); color: var(--text-on-dark); }
 .rl-footer .rl-container { padding-block: var(--space-9); }
@@ -455,6 +495,36 @@ button { font-family: inherit; }
 .rl-fade-in { animation: rl-fade-in var(--duration-standard) var(--ease-standard) both; }
 .rl-fade-up { animation: rl-fade-up var(--duration-slow) var(--ease-standard) both; }
 
+/* Count / badge acknowledgement — a quiet scale bump, a whisper of overshoot. */
+@keyframes rl-pop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.18); }
+  70%  { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+.rl-pop { display: inline-block; animation: rl-pop var(--duration-standard) var(--ease-standard); }
+
+/* Toast rise-in / fade-out. */
+@keyframes rl-toast-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Scroll-reveal: hidden state applied only after JS mounts (see Reveal.tsx),
+   so no-JS and reduced-motion users always see final content. */
+.rl-reveal { opacity: 0; transform: translateY(20px); transition: opacity var(--duration-slow) var(--ease-standard), transform var(--duration-slow) var(--ease-standard); }
+.rl-reveal.is-visible { opacity: 1; transform: none; }
+
+/* Grid entrance stagger — CSS-only, reduced-motion safe (animation is zeroed). */
+.rl-stagger > * { animation: rl-fade-up var(--duration-slow) var(--ease-standard) both; }
+.rl-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.rl-stagger > *:nth-child(2) { animation-delay: 60ms; }
+.rl-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.rl-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.rl-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.rl-stagger > *:nth-child(6) { animation-delay: 300ms; }
+.rl-stagger > *:nth-child(7) { animation-delay: 360ms; }
+.rl-stagger > *:nth-child(8) { animation-delay: 420ms; }
+.rl-stagger > *:nth-child(n+9) { animation-delay: 480ms; }
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-delay: 0ms !important; transition-duration: 0.001ms !important; }
+  .rl-reveal { opacity: 1 !important; transform: none !important; }
 }

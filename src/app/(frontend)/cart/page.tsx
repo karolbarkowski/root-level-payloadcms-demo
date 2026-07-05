@@ -10,7 +10,7 @@ export default function CartPage() {
   const router = useRouter()
 
   return (
-    <div className="rl-view" style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 96px' }}>
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '56px 32px 96px' }}>
       <h1 className="rl-h1" style={{ fontSize: 44, margin: '0 0 40px' }}>
         Your Cart
       </h1>
@@ -43,22 +43,23 @@ export default function CartPage() {
                   {l.variant && <div style={{ fontSize: 12, color: 'var(--color-text-secondary)', marginBottom: 3 }}>{l.variant}</div>}
                   {l.sku && <div style={{ fontSize: 11, color: 'var(--color-text-secondary)', letterSpacing: '0.04em', marginBottom: 12 }}>SKU {l.sku}</div>}
                   <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--color-border)', borderRadius: 2 }}>
-                      <button onClick={() => changeQty(l.key, -1)} aria-label="Decrease quantity" style={{ width: 32, height: 34, background: 'transparent', border: 0, cursor: 'pointer', fontSize: 15 }}>
+                    <div className="rl-qty rl-qty--sm">
+                      <button onClick={() => changeQty(l.key, -1)} aria-label="Decrease quantity" className="rl-qty__btn">
                         −
                       </button>
-                      <span style={{ width: 26, textAlign: 'center', fontSize: 14 }}>{l.qty}</span>
-                      <button onClick={() => changeQty(l.key, 1)} aria-label="Increase quantity" style={{ width: 32, height: 34, background: 'transparent', border: 0, cursor: 'pointer', fontSize: 15 }}>
+                      <span key={l.qty} className="rl-qty__val rl-num-change">{l.qty}</span>
+                      <button onClick={() => changeQty(l.key, 1)} aria-label="Increase quantity" className="rl-qty__btn">
                         +
                       </button>
                     </div>
-                    <span
+                    <button
+                      type="button"
                       onClick={() => removeLine(l.key)}
                       className="rl-nav-util"
-                      style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-text-secondary)', cursor: 'pointer' }}
+                      style={{ fontSize: 11, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-text-secondary)', cursor: 'pointer', background: 'transparent', border: 0, padding: 0 }}
                     >
                       Remove
-                    </span>
+                    </button>
                   </div>
                 </div>
                 <div style={{ fontSize: 16, textAlign: 'right' }}>{money(l.unit * l.qty)}</div>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import type { NormProduct } from '@/lib/products'
 import { resolveSelection } from '@/lib/products'
 import { money } from '@/lib/format'
@@ -18,6 +18,9 @@ export function ProductPurchase({
   const [finishIdx, setFinishIdx] = useState(0)
   const [sizeIdx, setSizeIdx] = useState(0)
   const [qty, setQty] = useState(1)
+  const [justAdded, setJustAdded] = useState(false)
+  const addedTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  useEffect(() => () => { if (addedTimer.current) clearTimeout(addedTimer.current) }, [])
 
   const selectedFinish = product.finishes[finishIdx]?.name ?? null
   const selectedSize = product.sizes[sizeIdx]?.value ?? null
@@ -41,6 +44,9 @@ export function ProductPurchase({
       },
       qty,
     )
+    setJustAdded(true)
+    if (addedTimer.current) clearTimeout(addedTimer.current)
+    addedTimer.current = setTimeout(() => setJustAdded(false), 1200)
   }
 
   return (
@@ -66,17 +72,8 @@ export function ProductPurchase({
                 title={f.name}
                 aria-label={f.name}
                 aria-pressed={i === finishIdx}
-                style={{
-                  width: 34,
-                  height: 34,
-                  borderRadius: 999,
-                  background: f.swatch,
-                  cursor: 'pointer',
-                  padding: 0,
-                  border: '1px solid var(--color-border)',
-                  boxShadow: i === finishIdx ? '0 0 0 2px var(--color-bg), 0 0 0 3px var(--color-ink)' : 'none',
-                  transition: 'var(--transition-hover)',
-                }}
+                className="rl-swatch rl-swatch--lg"
+                style={{ background: f.swatch }}
               />
             ))}
           </div>
@@ -90,59 +87,45 @@ export function ProductPurchase({
             Size
           </div>
           <div style={{ display: 'flex', gap: 10, marginBottom: 28 }}>
-            {product.sizes.map((s, i) => {
-              const on = i === sizeIdx
-              return (
-                <button
-                  key={s.value}
-                  onClick={() => setSizeIdx(i)}
-                  aria-pressed={on}
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: 12,
-                    letterSpacing: '0.04em',
-                    padding: '10px 18px',
-                    borderRadius: 2,
-                    cursor: 'pointer',
-                    background: on ? 'var(--color-ink)' : 'transparent',
-                    color: on ? 'var(--color-bg)' : 'var(--color-ink)',
-                    border: `1px solid ${on ? 'var(--color-ink)' : 'var(--color-border)'}`,
-                    transition: 'var(--transition-hover)',
-                  }}
-                >
-                  {s.label}
-                </button>
-              )
-            })}
+            {product.sizes.map((s, i) => (
+              <button
+                key={s.value}
+                onClick={() => setSizeIdx(i)}
+                aria-pressed={i === sizeIdx}
+                className="rl-sizepill"
+              >
+                {s.label}
+              </button>
+            ))}
           </div>
         </>
       )}
 
       {/* Qty + Add */}
       <div style={{ display: 'flex', gap: 14, marginBottom: 26 }}>
-        <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--color-border)', borderRadius: 2 }}>
+        <div className="rl-qty">
           <button
             onClick={() => setQty((q) => Math.max(1, q - 1))}
             aria-label="Decrease quantity"
-            style={{ width: 44, height: 48, background: 'transparent', border: 0, fontSize: 18, cursor: 'pointer', color: 'var(--color-ink)' }}
+            className="rl-qty__btn"
           >
             −
           </button>
-          <span style={{ width: 34, textAlign: 'center', fontSize: 15 }}>{qty}</span>
+          <span key={qty} className="rl-qty__val rl-num-change">{qty}</span>
           <button
             onClick={() => setQty((q) => q + 1)}
             aria-label="Increase quantity"
-            style={{ width: 44, height: 48, background: 'transparent', border: 0, fontSize: 18, cursor: 'pointer', color: 'var(--color-ink)' }}
+            className="rl-qty__btn"
           >
             +
           </button>
         </div>
         <button
           onClick={handleAdd}
-          className="rl-btn"
+          className={justAdded ? 'rl-btn rl-btn--brass' : 'rl-btn'}
           style={{ flex: 1, height: 50 }}
         >
-          Add to Cart
+          {justAdded ? 'Added ✓' : 'Add to Cart'}
         </button>
       </div>
       <div style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-brass)', marginBottom: 34 }}>

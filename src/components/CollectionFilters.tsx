@@ -103,18 +103,15 @@ export function CollectionFilters({ facets, active }: { facets: FacetData; activ
           {categoryItems.map((c) => {
             const activeCat = active.category === c.slug
             return (
-              <span
+              <button
                 key={c.slug}
+                type="button"
                 onClick={() => pushFilters({ category: c.slug })}
-                style={{
-                  fontSize: 14,
-                  cursor: 'pointer',
-                  color: activeCat ? 'var(--color-brass)' : 'var(--color-ink)',
-                  transition: 'var(--transition-hover)',
-                }}
+                aria-pressed={activeCat}
+                className={`rl-facet-item${activeCat ? ' is-active' : ''}`}
               >
                 {c.title}
-              </span>
+              </button>
             )
           })}
         </div>
@@ -131,7 +128,8 @@ export function CollectionFilters({ facets, active }: { facets: FacetData; activ
                 <label
                   key={f.name}
                   onClick={() => toggleFinish(f.name)}
-                  style={{ display: 'flex', alignItems: 'center', gap: 11, cursor: 'pointer', fontSize: 14 }}
+                  className="rl-facet-item"
+                  style={{ display: 'flex', alignItems: 'center', gap: 11 }}
                 >
                   <span
                     style={{
@@ -143,9 +141,18 @@ export function CollectionFilters({ facets, active }: { facets: FacetData; activ
                       alignItems: 'center',
                       justifyContent: 'center',
                       background: on ? 'var(--color-ink)' : 'transparent',
+                      transition: 'var(--transition-hover)',
                     }}
                   >
-                    <span style={{ width: 8, height: 8, background: on ? 'var(--color-bg)' : 'transparent' }} />
+                    <span
+                      style={{
+                        width: 8,
+                        height: 8,
+                        background: on ? 'var(--color-bg)' : 'transparent',
+                        transform: on ? 'scale(1)' : 'scale(0)',
+                        transition: 'transform var(--duration-fast) var(--ease-standard)',
+                      }}
+                    />
                   </span>
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                     <span
@@ -184,18 +191,18 @@ export function CollectionFilters({ facets, active }: { facets: FacetData; activ
         </div>
       </div>
 
-      <span
+      <button
+        type="button"
         onClick={() => router.push('/shop', { scroll: false })}
+        className="rl-facet-item is-active"
         style={{
           fontSize: 11,
           letterSpacing: '0.08em',
           textTransform: 'uppercase',
-          cursor: 'pointer',
-          color: 'var(--color-brass)',
         }}
       >
         Clear all filters
-      </span>
+      </button>
     </div>
   )
 }

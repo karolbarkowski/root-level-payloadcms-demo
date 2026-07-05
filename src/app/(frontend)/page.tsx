@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { getCategories, getProducts, getPosts, formatPostDate } from '@/lib/queries'
 import { gradientFor } from '@/lib/gradient'
 import { ProductCard } from '@/components/ProductCard'
+import { Reveal } from '@/components/Reveal'
 
 // Always reflect the current CMS data (new products / posts appear immediately).
 export const dynamic = 'force-dynamic'
@@ -14,7 +15,7 @@ export default async function HomePage() {
   const teaser = posts.slice(0, 3)
 
   return (
-    <div className="rl-view">
+    <div>
       {/* HERO */}
       <section
         style={{
@@ -67,6 +68,7 @@ export default async function HomePage() {
       </section>
 
       {/* SHOP BY CATEGORY */}
+      <Reveal>
       <div className="rl-container" style={{ padding: '96px 32px 40px' }}>
         <div
           style={{
@@ -79,19 +81,19 @@ export default async function HomePage() {
           <h2 className="rl-h2" style={{ fontSize: 34 }}>
             Shop by Category
           </h2>
-          <Link href="/shop" className="rl-link" style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <Link href="/shop" className="rl-link rl-arrow" style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             View All
           </Link>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
           {categories.map((c) => (
-            <Link key={c.id} href={`/shop?category=${c.slug}`}>
+            <Link key={c.id} href={`/shop?category=${c.slug}`} className="rl-tile">
               <div
                 className="rl-media"
                 style={{ aspectRatio: '3 / 4', background: gradientFor(c.slug), marginBottom: 16 }}
               >
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 22 }}>
-                  <span style={{ fontFamily: 'var(--font-serif-display)', fontSize: 22, color: 'var(--color-surface)' }}>
+                  <span className="rl-tile__label" style={{ fontFamily: 'var(--font-serif-display)', fontSize: 22, color: 'var(--color-surface)' }}>
                     {c.title}
                   </span>
                 </div>
@@ -103,10 +105,11 @@ export default async function HomePage() {
           ))}
         </div>
       </div>
+      </Reveal>
 
       {/* NEW THIS SEASON */}
       {featured.length > 0 && (
-        <div className="rl-container" style={{ padding: '64px 32px 40px' }}>
+        <Reveal className="rl-container" style={{ padding: '64px 32px 40px' }}>
           <div style={{ textAlign: 'center', marginBottom: 48 }}>
             <div className="rl-eyebrow" style={{ marginBottom: 14 }}>
               New This Season
@@ -115,16 +118,16 @@ export default async function HomePage() {
               Recently Added
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px 16px' }}>
+          <div className="rl-stagger" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '32px 16px' }}>
             {featured.map((p) => (
               <ProductCard key={p.id} product={p} />
             ))}
           </div>
-        </div>
+        </Reveal>
       )}
 
       {/* EDITORIAL BAND */}
-      <div className="rl-section--alt" style={{ marginTop: 64 }}>
+      <Reveal className="rl-section--alt" style={{ marginTop: 64 }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 32px', textAlign: 'center' }}>
           <div className="rl-eyebrow" style={{ marginBottom: 20 }}>
             Design, Delivered
@@ -137,22 +140,22 @@ export default async function HomePage() {
             the life of the piece.
           </p>
         </div>
-      </div>
+      </Reveal>
 
       {/* FROM THE JOURNAL */}
       {teaser.length > 0 && (
-        <div className="rl-container" style={{ padding: '96px 32px' }}>
+        <Reveal className="rl-container" style={{ padding: '96px 32px' }}>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', marginBottom: 40 }}>
             <h2 className="rl-h2" style={{ fontSize: 34 }}>
               From the Journal
             </h2>
-            <Link href="/journal" className="rl-link" style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            <Link href="/journal" className="rl-link rl-arrow" style={{ fontSize: 12, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
               All Posts
             </Link>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
             {teaser.map((post) => (
-              <Link key={post.id} href={`/journal/${post.slug}`}>
+              <Link key={post.id} href={`/journal/${post.slug}`} className="rl-tile">
                 <div
                   className="rl-media"
                   style={{ aspectRatio: '3 / 2', background: gradientFor(post.slug), marginBottom: 18 }}
@@ -169,7 +172,7 @@ export default async function HomePage() {
               </Link>
             ))}
           </div>
-        </div>
+        </Reveal>
       )}
     </div>
   )
