@@ -5,6 +5,27 @@ import { CollectionFilters, type FacetData, type ActiveFilters } from '@/compone
 
 const PRICE_CEILING = 2600
 
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
+  const sp = await searchParams
+  const category = typeof sp.category === 'string' ? sp.category : 'all'
+  if (category === 'all') {
+    return {
+      title: 'Shop All Furnishings | Root Level',
+      description: 'Browse the full Root Level collection of handcrafted lighting, furniture, and decor.',
+    }
+  }
+  const categories = await getCategories()
+  const title = categories.find((c) => c.slug === category)?.title ?? 'All Furnishings'
+  return {
+    title: `${title} | Root Level`,
+    description: `Handcrafted ${title.toLowerCase()} from Root Level, built to be lived with for decades.`,
+  }
+}
+
 export default async function ShopPage({
   searchParams,
 }: {

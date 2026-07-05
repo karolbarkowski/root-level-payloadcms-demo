@@ -2,7 +2,21 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getPosts, formatPostDate } from '@/lib/queries'
 import { gradientFor } from '@/lib/gradient'
+import { photoFor } from '@/lib/images'
 import { RichText } from '@/components/RichText'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
+  if (!post) return { title: 'Journal | Root Level' }
+  const description = post.excerpt || `A note from the Root Level journal: ${post.title}.`
+  const image = post.coverUrl ?? photoFor(post.slug, 1200, 630)
+  return {
+    title: `${post.title} | Root Level Journal`,
+    description,
+    openGraph: { title: post.title, description, images: [image], type: 'article' },
+  }
+}
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -35,7 +49,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <div style={{ maxWidth: 1000, margin: '0 auto', padding: '0 32px' }}>
         <div className="rl-media" style={{ aspectRatio: '21 / 9', background: gradientFor(post.slug), marginBottom: 48 }}>
-          {post.coverUrl && <img src={post.coverUrl} alt={post.title} />}
+          <img src={post.coverUrl ?? photoFor(post.slug, 1440, 620)} alt={post.title} />
         </div>
       </div>
 
@@ -57,7 +71,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             {related.map((r) => (
               <Link key={r.id} href={`/journal/${r.slug}`}>
                 <div className="rl-media" style={{ aspectRatio: '3 / 2', background: gradientFor(r.slug), marginBottom: 16 }}>
-                  {r.coverUrl && <img src={r.coverUrl} alt={r.title} />}
+                  <img src={r.coverUrl ?? photoFor(r.slug, 800, 600)} alt={r.title} />
                 </div>
                 <div style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-brass)', marginBottom: 8 }}>
                   {r.tags[0]?.title ?? ''}

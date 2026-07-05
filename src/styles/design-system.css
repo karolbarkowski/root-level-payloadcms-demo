@@ -25,7 +25,9 @@
    ========================================================================== */
 
 /* 1. FONTS ----------------------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap');
+/* Fraunces + Inter are loaded via next/font in (frontend)/layout.tsx, which
+   exposes them as --font-fraunces / --font-inter. No render-blocking Google
+   Fonts <link> here. The type tokens below consume those variables. */
 
 /* 2. DESIGN TOKENS --------------------------------------------------------- */
 :root {
@@ -58,8 +60,8 @@
   --overlay-scrim: rgba(25, 23, 20, 0.45);
 
   /* --- Type --- */
-  --font-serif-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif-display: var(--font-fraunces), 'Cormorant Garamond', Georgia, serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: var(--font-serif-display);
   --font-body: var(--font-sans);
   --font-label: var(--font-sans);

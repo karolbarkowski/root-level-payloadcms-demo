@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { gradientFor, thumbGradients } from '@/lib/gradient'
+import { photoFor } from '@/lib/images'
 
 /**
  * PDP image gallery. Clicking a thumbnail swaps the large frame to that view
@@ -17,9 +18,13 @@ export function ProductGallery({
   name: string
   imageUrls: string[]
 }) {
-  // View 0 mirrors the main tone; views 1–3 use the subtly varied thumb tones.
+  // View 0 mirrors the main tone; views 1-3 use the subtly varied thumb tones.
+  // Real uploads win per view; otherwise each view gets a stable editorial photo.
   const gradients = [gradientFor(slug), ...thumbGradients(slug).slice(1)]
-  const views = gradients.map((gradient, i) => ({ gradient, img: imageUrls[i] }))
+  const views = gradients.map((gradient, i) => ({
+    gradient,
+    img: imageUrls[i] ?? photoFor(slug, 900, 900, i),
+  }))
 
   const [active, setActive] = useState(0)
 
@@ -33,7 +38,7 @@ export function ProductGallery({
           <img
             key={active}
             src={views[active].img}
-            alt={`${name}${active > 0 ? ` — view ${active + 1}` : ''}`}
+            alt={`${name}${active > 0 ? `, view ${active + 1}` : ''}`}
             className="rl-fade-in"
           />
         )}

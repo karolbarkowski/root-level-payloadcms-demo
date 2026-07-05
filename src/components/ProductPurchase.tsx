@@ -62,7 +62,7 @@ export function ProductPurchase({
       {product.finishes.length > 0 && (
         <>
           <div style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-ink)', fontWeight: 600, marginBottom: 12 }}>
-            Finish — {selectedFinish}
+            Finish: {selectedFinish}
           </div>
           <div style={{ display: 'flex', gap: 12, marginBottom: 28 }}>
             {product.finishes.map((f, i) => (

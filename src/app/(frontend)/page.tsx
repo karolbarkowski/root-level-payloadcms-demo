@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getCategories, getProducts, getPosts, formatPostDate } from '@/lib/queries'
 import { gradientFor } from '@/lib/gradient'
+import { photoFor } from '@/lib/images'
 import { ProductCard } from '@/components/ProductCard'
 import { Reveal } from '@/components/Reveal'
 
@@ -16,52 +17,49 @@ export default async function HomePage() {
 
   return (
     <div>
-      {/* HERO */}
-      <section
-        style={{
-          position: 'relative',
-          height: 620,
-          background: 'linear-gradient(135deg, #E5DBCB 0%, #B79A6A 55%, #7C6136 100%)',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
+      {/* HERO — asymmetric split: editorial copy against a real photograph */}
+      <section className="rl-hero">
         <div className="rl-container">
-          <div style={{ maxWidth: 560 }}>
-            <div
-              style={{
-                fontSize: 13,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: 'var(--color-espresso)',
-                fontWeight: 600,
-                marginBottom: 22,
-              }}
-            >
-              Est. 2006 · Handcrafted
+          <div className="rl-hero__grid">
+            <div className="rl-hero__copy">
+              <div
+                style={{
+                  fontSize: 13,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  color: 'var(--color-brass)',
+                  fontWeight: 600,
+                  marginBottom: 22,
+                }}
+              >
+                Est. 2006 · Handcrafted
+              </div>
+              <h1 className="rl-h1" style={{ fontSize: 62, lineHeight: 1.05, margin: '0 0 24px' }}>
+                A Heritage of Distinction
+              </h1>
+              <p
+                style={{
+                  fontSize: 18,
+                  lineHeight: 1.7,
+                  color: 'var(--color-text-secondary)',
+                  margin: '0 0 36px',
+                  maxWidth: 440,
+                }}
+              >
+                Lighting, furniture, and objects made by hand. Quiet pieces built to be lived with
+                for decades, not seasons.
+              </p>
+              <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <Link href="/shop" className="rl-btn rl-btn--lg">
+                  Shop the Collection
+                </Link>
+                <Link href="/shop?category=lighting" className="rl-btn rl-btn--secondary rl-btn--lg">
+                  Explore Lighting
+                </Link>
+              </div>
             </div>
-            <h1 className="rl-h1" style={{ fontSize: 62, lineHeight: 1.05, margin: '0 0 24px' }}>
-              A Heritage of Distinction
-            </h1>
-            <p
-              style={{
-                fontSize: 18,
-                lineHeight: 1.7,
-                color: 'var(--color-espresso)',
-                margin: '0 0 36px',
-                maxWidth: 460,
-              }}
-            >
-              Lighting, furniture, and objects made by hand — quiet pieces built to be lived with for
-              decades, not seasons.
-            </p>
-            <div style={{ display: 'flex', gap: 14 }}>
-              <Link href="/shop" className="rl-btn rl-btn--lg">
-                Shop the Collection
-              </Link>
-              <Link href="/shop?category=lighting" className="rl-btn rl-btn--secondary rl-btn--lg">
-                Explore Lighting
-              </Link>
+            <div className="rl-hero__media" style={{ background: gradientFor('lighting') }}>
+              <img src={photoFor('root-level-hero', 1200, 1400)} alt="Handcrafted lighting in a quiet interior" />
             </div>
           </div>
         </div>
@@ -92,6 +90,8 @@ export default async function HomePage() {
                 className="rl-media"
                 style={{ aspectRatio: '3 / 4', background: gradientFor(c.slug), marginBottom: 16 }}
               >
+                <img src={photoFor(c.slug, 600, 800)} alt={c.title} />
+                <div className="rl-tile__scrim" />
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'flex-end', padding: 22 }}>
                   <span className="rl-tile__label" style={{ fontFamily: 'var(--font-serif-display)', fontSize: 22, color: 'var(--color-surface)' }}>
                     {c.title}
@@ -129,14 +129,11 @@ export default async function HomePage() {
       {/* EDITORIAL BAND */}
       <Reveal className="rl-section--alt" style={{ marginTop: 64 }}>
         <div style={{ maxWidth: 1000, margin: '0 auto', padding: '100px 32px', textAlign: 'center' }}>
-          <div className="rl-eyebrow" style={{ marginBottom: 20 }}>
-            Design, Delivered
-          </div>
           <h2 className="rl-h2" style={{ fontSize: 40, lineHeight: 1.2, margin: '0 0 22px' }}>
             Every piece leaves the studio finished by hand and delivered with white-glove care.
           </h2>
           <p style={{ fontSize: 17, lineHeight: 1.7, color: 'var(--color-text-secondary)', maxWidth: 620, margin: '0 auto' }}>
-            We keep our catalog small on purpose. What we make, we make well — and we stand behind it for
+            We keep our catalog small on purpose. What we make, we make well, and we stand behind it for
             the life of the piece.
           </p>
         </div>
@@ -160,7 +157,7 @@ export default async function HomePage() {
                   className="rl-media"
                   style={{ aspectRatio: '3 / 2', background: gradientFor(post.slug), marginBottom: 18 }}
                 >
-                  {post.coverUrl && <img src={post.coverUrl} alt={post.title} />}
+                  <img src={post.coverUrl ?? photoFor(post.slug, 800, 600)} alt={post.title} />
                 </div>
                 <div style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-brass)', marginBottom: 10 }}>
                   {post.tags[0]?.title ?? formatPostDate(post.publishedAt)}

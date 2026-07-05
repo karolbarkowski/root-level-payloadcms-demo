@@ -51,7 +51,7 @@ export default function CheckoutPage() {
     } catch (err) {
       console.error(err)
       setPlacing(false)
-      alert('Sorry — something went wrong placing your order. Please try again.')
+      alert('Sorry, something went wrong placing your order. Please try again.')
     }
   }
 
@@ -68,7 +68,7 @@ export default function CheckoutPage() {
         Delivery Details
       </h1>
       <div style={{ fontSize: 13, color: 'var(--color-text-secondary)', marginBottom: 40 }}>
-        Demo checkout — details are pre-filled and no payment is taken.
+        Demo checkout. Details are pre-filled and no payment is taken.
       </div>
 
       <div className="rl-two-col" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 56, alignItems: 'start' }}>
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
               <div>
                 <div style={{ fontSize: 16, marginBottom: 4 }}>White-Glove Delivery</div>
                 <div style={{ fontSize: 13, color: 'var(--color-text-secondary)' }}>
-                  Unpacked, placed, and packaging removed. 3–5 weeks.
+                  Unpacked, placed, and packaging removed. 3-5 weeks.
                 </div>
               </div>
               <div style={{ fontSize: 14, color: 'var(--color-brass)' }}>Complimentary</div>

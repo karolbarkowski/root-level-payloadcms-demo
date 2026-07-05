@@ -1,6 +1,13 @@
 import Link from 'next/link'
 import { getPosts, getTags, formatPostDate } from '@/lib/queries'
 import { gradientFor } from '@/lib/gradient'
+import { photoFor } from '@/lib/images'
+
+export const metadata = {
+  title: 'The Journal | Root Level',
+  description:
+    'Notes on materials, making, and living with handcrafted lighting, furniture, and objects from the Root Level studio.',
+}
 
 export default async function JournalPage({
   searchParams,
@@ -48,7 +55,7 @@ export default async function JournalPage({
           {filtered.map((post) => (
             <Link key={post.id} href={`/journal/${post.slug}`} className="rl-tile">
               <div className="rl-media" style={{ aspectRatio: '3 / 2', background: gradientFor(post.slug), marginBottom: 18 }}>
-                {post.coverUrl && <img src={post.coverUrl} alt={post.title} />}
+                <img src={post.coverUrl ?? photoFor(post.slug, 800, 600)} alt={post.title} />
               </div>
               <div style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-brass)', marginBottom: 10 }}>
                 {[post.tags.map((t) => t.title).join(' · '), formatPostDate(post.publishedAt)].filter(Boolean).join(' · ')}

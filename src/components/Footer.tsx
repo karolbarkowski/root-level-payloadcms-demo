@@ -10,7 +10,7 @@ export function Footer() {
               Root Level
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, opacity: 0.7, maxWidth: 280, margin: 0 }}>
-              Handcrafted lighting, furniture, and objects. Made to be lived with — and passed on.
+              Handcrafted lighting, furniture, and objects. Made to be lived with, and passed on.
             </p>
           </div>
           <div>
